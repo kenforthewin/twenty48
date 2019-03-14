@@ -179,38 +179,46 @@ class App extends Component {
     }
   }
 
+  cellColor = (number) => {
+    // return {
+    //   "2": "#287a8a",
+    //   "4": '#ACDDE7',
+    //   "8": "#ADB9E3",
+    //   "16": "#A379C9",
+    //   "32": "#B744B8"
+    // }[number]
+  }
+
   render() {
     return (
       <div className="App">
         <button onClick={this.resetBoard}>Reset</button>
-        <table>
-          <tbody>
-            <tr>
-              <td>{this.state.board[0]}</td>
-              <td>{this.state.board[1]}</td>
-              <td>{this.state.board[2]}</td>
-              <td>{this.state.board[3]}</td>
-            </tr>
-            <tr>
-              <td>{this.state.board[4]}</td>
-              <td>{this.state.board[5]}</td>
-              <td>{this.state.board[6]}</td>
-              <td>{this.state.board[7]}</td>
-            </tr>
-            <tr>
-              <td>{this.state.board[8]}</td>
-              <td>{this.state.board[9]}</td>
-              <td>{this.state.board[10]}</td>
-              <td>{this.state.board[11]}</td>
-            </tr>
-            <tr>
-              <td>{this.state.board[12]}</td>
-              <td>{this.state.board[13]}</td>
-              <td>{this.state.board[14]}</td>
-              <td>{this.state.board[15]}</td>
-            </tr>
-          </tbody>
-        </table>
+          <div class="container">
+            <div class="row">
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[0]) }}>{this.state.board[0]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[1]) }}>{this.state.board[1]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[2]) }}>{this.state.board[2]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[3]) }}>{this.state.board[3]}</div>
+            </div>
+            <div class="row">
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[4]) }}>{this.state.board[4]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[5]) }}>{this.state.board[5]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[6]) }}>{this.state.board[6]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[7]) }}>{this.state.board[7]}</div>
+            </div>
+            <div class="row">
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[8]) }}>{this.state.board[8]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[9]) }}>{this.state.board[9]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[10]) }}>{this.state.board[10]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[11]) }}>{this.state.board[11]}</div>
+            </div>
+            <div class="row">
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[12]) }}>{this.state.board[12]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[13]) }}>{this.state.board[13]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[14]) }}>{this.state.board[14]}</div>
+              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[15]) }}>{this.state.board[15]}</div>
+            </div>
+          </div>
         <button onClick={() => this.move('left')} >left</button>
         <button onClick={() => this.move('right')} >right</button>
         <button onClick={() => this.move('up')} >up</button>
