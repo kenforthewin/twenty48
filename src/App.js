@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
+import Cell from './components/Cell'
+import {
+  moveLeft,
+  moveRight,
+  moveUp,
+  moveDown,
+  arraysEqual,
+  getRandomInt } from './utils/game'
+import './App.css'
 
 const blankBoard = [
   null, null, null, null,
@@ -23,7 +31,7 @@ class App extends Component {
 
     const board = this.state.board.slice()
 
-    board[blanks[this.getRandomInt(blanks.length)]] = 2
+    board[blanks[getRandomInt(blanks.length)]] = 2
 
     this.setState({board})
   }
@@ -41,152 +49,29 @@ class App extends Component {
     }
   }
 
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
-  }
-
   resetBoard = () => {
     this.setState({board: blankBoard}, () => {
       this.insertNewNumber()
     })
   }
 
-  arraysEqual(a, b) {
-    if (a === b) return true
-
-    for (let i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false
-    }
-    return true
-  }
-
-  moveLeft = (board) => {
-    for(let i = 0; i < 16; i+= 4) {
-      for(let j = i; j < i + 4; j++) {
-        for(let k = j + 1; k < i + 4; k++) {
-          if (board[j] === null && board[k] !== null) {
-            board[j] = board[k]
-            board[k] = null
-            break
-          }
-        }
-        for(let k = j + 1; k < i + 4; k++) {
-          if (board[j] !== null) {
-            if (board[k] === board[j]) {
-              board[j] += board[k]
-              board[k] = null
-              break
-            } else if (board[k] !== null) {
-              break
-            }
-          }
-        }
-      }
-    }
-  }
-
-  moveUp = (board) => {
-    for(let i = 0; i < 4; i++) {
-      for(let j = i; j < 16; j += 4) {
-        for(let k = j + 4; k < 16; k += 4) {
-          if (board[j] === null && board[k] !== null) {
-            board[j] = board[k]
-            board[k] = null
-            break
-          }
-        }
-        for(let k = j + 4; k < 16; k += 4) {
-          if (board[j] !== null) {
-            if (board[k] === board[j]) {
-              board[j] += board[k]
-              board[k] = null
-              break
-            } else if (board[k] !== null) {
-              break
-            }
-          }
-        }
-      }
-    }
-  }
-
-  moveDown = (board) => {
-    for(let i = 12; i < 16; i++) {
-      for(let j = i; j >= 0; j -= 4) {
-        for(let k = j - 4; k >= 0; k -= 4) {
-          if (board[j] === null && board[k] !== null) {
-            board[j] = board[k]
-            board[k] = null
-            break
-          }
-        }
-        for(let k = j - 4; k >= 0; k -= 4) {
-          if (board[j] !== null) {
-            if (board[k] === board[j]) {
-              board[j] += board[k]
-              board[k] = null
-              break
-            } else if (board[k] !== null) {
-              break
-            }
-          }
-        }
-      }
-    }
-  }
-
-  moveRight = (board) => {
-    for(let i = 3; i < 16; i+= 4) {
-      for(let j = i; j > i - 4; j--) {
-        for(let k = j - 1; k > i - 4; k--) {
-          if (board[j] === null && board[k] !== null) {
-            board[j] = board[k]
-            board[k] = null
-            break
-          }
-        }
-        for(let k = j - 1; k > i - 4; k--) {
-          if (board[j] !== null) {
-            if (board[k] === board[j]) {
-              board[j] += board[k]
-              board[k] = null
-              break
-            } else if (board[k] !== null) {
-              break
-            }
-          }
-        }
-      }
-    }
-  }
-
   move = (direction) => {
     const board = this.state.board.slice()
 
     const moveMap = {
-      left: this.moveLeft,
-      right: this.moveRight,
-      up: this.moveUp,
-      down: this.moveDown
+      left: moveLeft,
+      right: moveRight,
+      up: moveUp,
+      down: moveDown
     }
 
     moveMap[direction](board)
 
-    if (!this.arraysEqual(board, this.state.board)) {
+    if (!arraysEqual(board, this.state.board)) {
       this.setState({board}, () => {
         this.insertNewNumber()
       })
     }
-  }
-
-  cellColor = (number) => {
-    // return {
-    //   "2": "#287a8a",
-    //   "4": '#ACDDE7',
-    //   "8": "#ADB9E3",
-    //   "16": "#A379C9",
-    //   "32": "#B744B8"
-    // }[number]
   }
 
   render() {
@@ -195,28 +80,28 @@ class App extends Component {
         <button onClick={this.resetBoard}>Reset</button>
           <div class="container">
             <div class="row">
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[0]) }}>{this.state.board[0]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[1]) }}>{this.state.board[1]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[2]) }}>{this.state.board[2]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[3]) }}>{this.state.board[3]}</div>
+              <Cell value={this.state.board[0]} />
+              <Cell value={this.state.board[1]} />
+              <Cell value={this.state.board[2]} />
+              <Cell value={this.state.board[3]} />
             </div>
             <div class="row">
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[4]) }}>{this.state.board[4]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[5]) }}>{this.state.board[5]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[6]) }}>{this.state.board[6]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[7]) }}>{this.state.board[7]}</div>
+              <Cell value={this.state.board[4]} />
+              <Cell value={this.state.board[5]} />
+              <Cell value={this.state.board[6]} />
+              <Cell value={this.state.board[7]} />
             </div>
             <div class="row">
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[8]) }}>{this.state.board[8]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[9]) }}>{this.state.board[9]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[10]) }}>{this.state.board[10]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[11]) }}>{this.state.board[11]}</div>
+              <Cell value={this.state.board[8]} />
+              <Cell value={this.state.board[9]} />
+              <Cell value={this.state.board[10]} />
+              <Cell value={this.state.board[11]} />
             </div>
             <div class="row">
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[12]) }}>{this.state.board[12]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[13]) }}>{this.state.board[13]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[14]) }}>{this.state.board[14]}</div>
-              <div class="cell" style={{ backgroundColor: this.cellColor(this.state.board[15]) }}>{this.state.board[15]}</div>
+              <Cell value={this.state.board[12]} />
+              <Cell value={this.state.board[13]} />
+              <Cell value={this.state.board[14]} />
+              <Cell value={this.state.board[15]} />
             </div>
           </div>
         <button onClick={() => this.move('left')} >left</button>
@@ -224,8 +109,8 @@ class App extends Component {
         <button onClick={() => this.move('up')} >up</button>
         <button onClick={() => this.move('down')} >down</button>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

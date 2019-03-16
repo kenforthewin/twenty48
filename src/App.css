@@ -5,7 +5,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  
 }
 
 .row {
@@ -17,12 +16,13 @@
 .cell {
   width: 75px;
   height: 75px;
-  border: 1px;
+  /* border: 1px; */
   font-size: 25px;
-  margin: -0.5px;
-  border-style: solid;
+  /* margin: -0.5px; */
+  /* border-style: solid; */
   display: flex;
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  color: #3b444c;
 }
