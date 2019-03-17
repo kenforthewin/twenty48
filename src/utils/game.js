@@ -7,20 +7,42 @@ export const arraysEqual = (a, b) => {
   return true
 }
 
-export const moveLeft = (board) => {
+const blankmoveBoard = [
+  0,0,0,0,
+  0,0,0,0,
+  0,0,0,0,
+  0,0,0,0
+]
+
+const getBlankmoveBoard = () => blankmoveBoard.slice()
+
+export function* moveLeft(board) {
+  let moveBoard = getBlankmoveBoard()
+  
   for(let i = 0; i < 16; i+= 4) {
     for(let j = i; j < i + 4; j++) {
       for(let k = j + 1; k < i + 4; k++) {
         if (board[j] === null && board[k] !== null) {
           board[j] = board[k]
           board[k] = null
+          moveBoard[k] = Math.abs(j - k)
           break
         }
       }
+    }
+  }
+  
+  yield { moveBoard: moveBoard.slice(), board: board.slice() }
+
+  moveBoard = getBlankmoveBoard()
+
+  for(let i = 0; i < 16; i+= 4) {
+    for(let j = i; j < i + 4; j++) {
       for(let k = j + 1; k < i + 4; k++) {
         if (board[j] !== null) {
           if (board[k] === board[j]) {
             board[j] += board[k]
+            moveBoard[k] = Math.abs(j - k)
             board[k] = null
             break
           } else if (board[k] !== null) {
@@ -30,6 +52,8 @@ export const moveLeft = (board) => {
       }
     }
   }
+
+  yield { moveBoard: moveBoard.slice(), board: board.slice() }
 }
 
 export const moveUp = (board) => {
