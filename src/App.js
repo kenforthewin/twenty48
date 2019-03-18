@@ -80,23 +80,20 @@ class App extends Component {
       down: moveDown
     }
 
-    const moveGenerator = moveMap[direction](board.slice())
-    const moveOne = moveGenerator.next().value
-    // const moveTwo = moveGenerator.next().value
+    const moveObj = moveMap[direction](board.slice())
 
-    // this.setState({board: moveTwo.board}, () => {
-    //   if (!arraysEqual(moveTwo.board, board)) this.insertNewNumber()
+    // this.setState({ board: moveObj.board }, (state) => {
+    //   if (!arraysEqual(moveObj.board, board)) this.insertNewNumber(state)
     // })
-
-    this.setState({moveBoard: moveOne.moveBoard, direction, moving: true}, () => {
-      const moveTwo = moveGenerator.next().value
+    console.log(moveObj)
+    this.setState({moveBoard: moveObj.moveBoard, direction, moving: true}, () => {
       setTimeout(() => {
-        this.setState({board: moveOne.board, moveBoard: moveTwo.moveBoard}, () => {
-          setTimeout(() => {
-            this.setState({board: moveTwo.board, moveBoard: blankMoveBoard}, (state) => {
-              if (!arraysEqual(moveTwo.board, board)) this.insertNewNumber(state)
-            })
-          }, 300)
+        this.setState({board: moveObj.board, moveBoard: blankMoveBoard}, (state) => {
+          if (!arraysEqual(moveObj.board, board)) {
+            this.insertNewNumber(state)
+          } else {
+            this.setState({moving: false})
+          }
         })
       }, 300)
     })

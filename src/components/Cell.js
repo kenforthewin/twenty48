@@ -13,7 +13,8 @@ const Box = posed.div({
   "y-3": {y: -225},
   "y+1": {y: 75},
   "y+2": {y: 150},
-  "y+3": {y: 225}
+  "y+3": {y: 225},
+  "default": { x: 0, y: 0 }
 })
 
 class Cell extends Component {
@@ -29,9 +30,9 @@ class Cell extends Component {
       "64": "#c49ac4",
       "128": "#e0f9b5",
       "256": "#397367",
-      // "512": 
+      // "512":
     }[value] || '#eef0f2'
-    const opacity = value ? '1' : 0
+    const opacity = value ? '1' : '0'
 
     return {
       backgroundColor,
@@ -42,11 +43,11 @@ class Cell extends Component {
   pose = () => {
     const { move, direction } = this.props
     if (move === 0) return 'default'
-
-    const xOrY = ['left, right'].includes(direction) ? 'y' : 'x'
-    const plusOrMinus = ['left', 'down'].includes(direction) ? '-' : '+'
-
-    return xOrY + plusOrMinus + move
+    const xOrY = ['left', 'right'].includes(direction) ? 'x' : 'y'
+    const plusOrMinus = ['left', 'up'].includes(direction) ? '-' : '+'
+    const pose = xOrY + plusOrMinus + move
+    console.log(pose)
+    return pose
   }
 
   render() {
