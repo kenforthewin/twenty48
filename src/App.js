@@ -17,7 +17,7 @@ const blankBoard = [
   null, null, null, null,
   null, null, null, null,
   null, null, null, null,
-  null, null, null, null
+  2, 2, 2, 2
 ]
 
 const blankMoveBoard = [
@@ -83,14 +83,12 @@ class App extends Component {
 
     const moveObj = moveMap[direction](board.slice())
 
+    if (arraysEqual(moveObj.board, board)) return
+
     this.setState({moveBoard: moveObj.moveBoard, direction, moving: true, done: false}, () => {
       setTimeout(() => {
         this.setState({board: moveObj.board, moveBoard: blankMoveBoard, done: true}, () => {
-          if (!arraysEqual(moveObj.board, board)) {
-              this.insertNewNumber()
-          } else {
-            this.setState({moving: false})
-          }
+          this.insertNewNumber()
         })
       }, 300)
     })
@@ -102,28 +100,28 @@ class App extends Component {
         <button onClick={this.resetBoard}>Reset</button>
           <div class="container">
             <div class="row">
-              <Cell value={this.state.board[0]} move={this.state.moveBoard[0]} direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[1]} move={this.state.moveBoard[1]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[2]} move={this.state.moveBoard[2]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[3]} move={this.state.moveBoard[3]}  direction={this.state.direction} done={this.state.done} />
+              <Cell value={this.state.board[0]} move={this.state.moveBoard[0]} direction={this.state.direction}/>
+              <Cell value={this.state.board[1]} move={this.state.moveBoard[1]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[2]} move={this.state.moveBoard[2]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[3]} move={this.state.moveBoard[3]}  direction={this.state.direction}/>
             </div>
             <div class="row">
-              <Cell value={this.state.board[4]} move={this.state.moveBoard[4]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[5]} move={this.state.moveBoard[5]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[6]} move={this.state.moveBoard[6]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[7]} move={this.state.moveBoard[7]}  direction={this.state.direction} done={this.state.done} />
+              <Cell value={this.state.board[4]} move={this.state.moveBoard[4]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[5]} move={this.state.moveBoard[5]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[6]} move={this.state.moveBoard[6]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[7]} move={this.state.moveBoard[7]}  direction={this.state.direction}/>
             </div>
             <div class="row">
-              <Cell value={this.state.board[8]} move={this.state.moveBoard[8]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[9]} move={this.state.moveBoard[9]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[10]} move={this.state.moveBoard[10]}  direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[11]} move={this.state.moveBoard[11]}  direction={this.state.direction} done={this.state.done} />
+              <Cell value={this.state.board[8]} move={this.state.moveBoard[8]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[9]} move={this.state.moveBoard[9]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[10]} move={this.state.moveBoard[10]}  direction={this.state.direction}/>
+              <Cell value={this.state.board[11]} move={this.state.moveBoard[11]}  direction={this.state.direction}/>
             </div>
             <div class="row">
-              <Cell value={this.state.board[12]} move={this.state.moveBoard[12]} direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[13]} move={this.state.moveBoard[13]} direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[14]} move={this.state.moveBoard[14]} direction={this.state.direction} done={this.state.done} />
-              <Cell value={this.state.board[15]} move={this.state.moveBoard[15]} direction={this.state.direction} done={this.state.done} />
+              <Cell value={this.state.board[12]} move={this.state.moveBoard[12]} direction={this.state.direction}/>
+              <Cell value={this.state.board[13]} move={this.state.moveBoard[13]} direction={this.state.direction}/>
+              <Cell value={this.state.board[14]} move={this.state.moveBoard[14]} direction={this.state.direction}/>
+              <Cell value={this.state.board[15]} move={this.state.moveBoard[15]} direction={this.state.direction}/>
             </div>
           </div>
         <button onClick={() => this.move('left')} >left</button>

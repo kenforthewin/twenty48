@@ -20,7 +20,7 @@ const Box = posed.div({
 class Cell extends Component {
 
   style = () => {
-    const { value, done } = this.props
+    const { value } = this.props
     const backgroundColor = {
       "2": "#C0CAAD",
       "4": '#C0CAAD',
@@ -34,16 +34,10 @@ class Cell extends Component {
     }[value] || '#eef0f2'
     const opacity = value ? '1' : '0'
 
-    const styles = {
+    return {
       backgroundColor,
       opacity
     }
-
-    if (done) {
-      styles['transform'] = 'translateX(0) translateY(0) !important'
-    }
-
-    return styles
   }
 
   pose = () => {
