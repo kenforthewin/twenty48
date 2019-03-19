@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import posed from 'react-pose';
+import posed, { tween } from 'react-pose';
 
 const Box = posed.div({
   "x-1": {x: -75},
@@ -14,13 +14,13 @@ const Box = posed.div({
   "y+1": {y: 75},
   "y+2": {y: 150},
   "y+3": {y: 225},
-  "default": { x: 0, y: 0 }
+  "default": { x: 0, y: 0, transition: { duration: 0 } }
 })
 
 class Cell extends Component {
 
   style = () => {
-    const { value } = this.props
+    const { value, done } = this.props
     const backgroundColor = {
       "2": "#C0CAAD",
       "4": '#C0CAAD',
@@ -34,10 +34,16 @@ class Cell extends Component {
     }[value] || '#eef0f2'
     const opacity = value ? '1' : '0'
 
-    return {
+    const styles = {
       backgroundColor,
       opacity
     }
+
+    if (done) {
+      styles['transform'] = 'translateX(0) translateY(0) !important'
+    }
+
+    return styles
   }
 
   pose = () => {

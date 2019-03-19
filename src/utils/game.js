@@ -26,15 +26,12 @@ export const moveLeft = (board) => {
           board[j] += board[k]
           moveBoard[k] = Math.abs(j - k)
           board[k] = null
-          break
         }
 
         if (board[j] === null && board[k] !== null) {
           board[j] = board[k]
           board[k] = null
           moveBoard[k] = Math.abs(j - k)
-
-          break
         }
       }
     }
@@ -54,15 +51,12 @@ export const moveUp = (board) => {
             board[j] += board[k]
             moveBoard[k] = Math.abs(Math.floor((j - k) / 4))
             board[k] = null
-            break
           }
 
           if (board[j] === null && board[k] !== null) {
             board[j] = board[k]
             board[k] = null
             moveBoard[k] = Math.abs(Math.floor((j - k) / 4))
-
-            break
           }
         }
       }
@@ -82,15 +76,12 @@ export const moveDown = (board) => {
           board[j] += board[k]
           moveBoard[k] = Math.abs(Math.floor((j - k) / 4))
           board[k] = null
-          break
         }
 
         if (board[j] === null && board[k] !== null) {
           board[j] = board[k]
           board[k] = null
           moveBoard[k] = Math.abs(Math.floor((j - k) / 4))
-
-          break
         }
       }
     }
@@ -109,15 +100,12 @@ export const moveRight = (board) => {
           board[j] += board[k]
           moveBoard[k] = Math.abs(j - k)
           board[k] = null
-          break
         }
 
         if (board[j] === null && board[k] !== null) {
           board[j] = board[k]
           board[k] = null
           moveBoard[k] = Math.abs(j - k)
-
-          break
         }
       }
     }
