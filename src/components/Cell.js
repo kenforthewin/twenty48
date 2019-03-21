@@ -22,7 +22,7 @@ class Cell extends Component {
   style = () => {
     const { value } = this.props
     const backgroundColor = {
-      "2": "#C0CAAD",
+      "2": "#c6adca",
       "4": '#C0CAAD',
       "8": "#9DA9A0",
       "16": "#B26E63",
@@ -46,7 +46,6 @@ class Cell extends Component {
     const xOrY = ['left', 'right'].includes(direction) ? 'x' : 'y'
     const plusOrMinus = ['left', 'up'].includes(direction) ? '-' : '+'
     const pose = xOrY + plusOrMinus + move
-    console.log(pose)
     return pose
   }
 

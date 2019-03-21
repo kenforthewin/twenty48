@@ -2,9 +2,18 @@
   text-align: center;
 }
 
+.centered {
+  display: flex;
+  justify-content: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
+  height: 300px;
+  width: 300px;
+  border: 1px;
+  border-style: solid;
 }
 
 .row {

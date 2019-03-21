@@ -118,6 +118,9 @@ class App extends Component {
     return (
       <div className="App">
         <button onClick={this.resetBoard}>Reset</button>
+        <br />
+        <br />
+        <div class="centered">
           <div class="container">
             <div class="row">
               <Cell value={this.state.board[0]} move={this.state.moveBoard[0]} direction={this.state.direction}/>
@@ -144,6 +147,7 @@ class App extends Component {
               <Cell value={this.state.board[15]} move={this.state.moveBoard[15]} direction={this.state.direction}/>
             </div>
           </div>
+        </div>
       </div>
     )
   }
