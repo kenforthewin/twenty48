@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "body-scroll-lock": "^2.6.1",
+    "hammerjs": "^2.0.8",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-pose": "^4.0.8",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "store": "^2.0.12"
   },
   "scripts": {
     "start": "react-scripts start",

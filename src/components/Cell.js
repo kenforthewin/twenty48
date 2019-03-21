@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import posed, { tween } from 'react-pose';
+import posed from 'react-pose';
 
 const Box = posed.div({
   "x-1": {x: -75, transition: { duration: 150 } },

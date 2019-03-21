@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Cell from './components/Cell'
+import Hammer from 'hammerjs'
+import { disableBodyScroll } from 'body-scroll-lock'
+import store from 'store'
+
 import {
   moveLeft,
   moveRight,
@@ -10,14 +14,10 @@ import {
 import './App.css'
 
 const blankBoard = [
-  // null, null, null, null,
-  // 16, 8, 4, 2,
-  // 4096, 2048, 1024, 512,
-  // 256, 128, 64, 32
   null, null, null, null,
   null, null, null, null,
   null, null, null, null,
-  2, 2, 2, 2
+  null, null, null, null
 ]
 
 const blankMoveBoard = [
@@ -29,10 +29,9 @@ const blankMoveBoard = [
 
 class App extends Component {
   state = {
-    board: blankBoard,
+    board: store.get('board', blankBoard),
     moveBoard: blankMoveBoard,
-    moving: false,
-    done: true
+    moving: false
   }
 
   insertNewNumber = (state = this.state) => {
@@ -48,10 +47,12 @@ class App extends Component {
     board[blanks[getRandomInt(blanks.length)]] = 2
 
     this.setState({board, moving: false})
+    store.set('board', board)
   }
 
   componentDidMount() {
-    this.insertNewNumber()
+    const body = document.querySelector('body')
+    disableBodyScroll(body)
 
     document.onkeydown = (evt) => {
       evt = evt || window.event;
@@ -61,6 +62,25 @@ class App extends Component {
       if (evt.keyCode === 39) this.move('right')
       if (evt.keyCode === 40) this.move('down')
     }
+
+    const hammerManager = new Hammer.Manager(body)
+    const Swipe = new Hammer.Swipe()
+    hammerManager.add(Swipe)
+    hammerManager.on('swipe', (e) => {
+      const direction = e.offsetDirection
+      if (direction === Hammer.DIRECTION_LEFT) {
+        this.move('left')
+      } else if (direction === Hammer.DIRECTION_RIGHT) {
+        this.move('right')
+      } else if (direction === Hammer.DIRECTION_UP) {
+        this.move('up')
+      } else if (direction === Hammer.DIRECTION_DOWN) {
+        this.move('down')
+      }
+    })
+
+    if (this.state.board.every(v => v === null))
+      this.insertNewNumber()
   }
 
   resetBoard = () => {
@@ -85,9 +105,9 @@ class App extends Component {
 
     if (arraysEqual(moveObj.board, board)) return
 
-    this.setState({moveBoard: moveObj.moveBoard, direction, moving: true, done: false}, () => {
+    this.setState({moveBoard: moveObj.moveBoard, direction, moving: true}, () => {
       setTimeout(() => {
-        this.setState({board: moveObj.board, moveBoard: blankMoveBoard, done: true}, () => {
+        this.setState({board: moveObj.board, moveBoard: blankMoveBoard}, () => {
           this.insertNewNumber()
         })
       }, 300)
@@ -124,10 +144,6 @@ class App extends Component {
               <Cell value={this.state.board[15]} move={this.state.moveBoard[15]} direction={this.state.direction}/>
             </div>
           </div>
-        <button onClick={() => this.move('left')} >left</button>
-        <button onClick={() => this.move('right')} >right</button>
-        <button onClick={() => this.move('up')} >up</button>
-        <button onClick={() => this.move('down')} >down</button>
       </div>
     )
   }
