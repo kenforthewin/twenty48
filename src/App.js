@@ -44,7 +44,7 @@ class App extends Component {
 
     const board = state.board.slice()
 
-    board[blanks[getRandomInt(blanks.length)]] = 2
+    board[blanks[getRandomInt(blanks.length)]] = 4
 
     this.setState({board, moving: false})
     store.set('board', board)
@@ -110,7 +110,7 @@ class App extends Component {
         this.setState({board: moveObj.board, moveBoard: blankMoveBoard}, () => {
           this.insertNewNumber()
         })
-      }, 300)
+      }, 100)
     })
   }
 

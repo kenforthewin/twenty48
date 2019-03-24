@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import posed from 'react-pose';
 
 const Box = posed.div({
-  "x-1": {x: -75, transition: { duration: 150 } },
-  "x-2": {x: -150, transition: { duration: 150 } },
-  "x-3": {x: -225, transition: { duration: 150 } },
-  "x+1": {x: 75, transition: { duration: 150 } },
-  "x+2": {x: 150, transition: { duration: 150 } },
-  "x+3": {x: 225, transition: { duration: 150 } },
-  "y-1": {y: -75, transition: { duration: 150 } },
-  "y-2": {y: -150, transition: { duration: 150 } },
-  "y-3": {y: -225, transition: { duration: 150 } },
-  "y+1": {y: 75, transition: { duration: 150 } },
-  "y+2": {y: 150, transition: { duration: 150 } },
-  "y+3": {y: 225, transition: { duration: 150 } },
+  "x-1": {x: -75, transition: { duration: 100 } },
+  "x-2": {x: -150, transition: { duration: 100 } },
+  "x-3": {x: -225, transition: { duration: 100 } },
+  "x+1": {x: 75, transition: { duration: 100 } },
+  "x+2": {x: 150, transition: { duration: 100 } },
+  "x+3": {x: 225, transition: { duration: 100 } },
+  "y-1": {y: -75, transition: { duration: 100 } },
+  "y-2": {y: -150, transition: { duration: 100 } },
+  "y-3": {y: -225, transition: { duration: 100 } },
+  "y+1": {y: 75, transition: { duration: 100 } },
+  "y+2": {y: 150, transition: { duration: 100 } },
+  "y+3": {y: 225, transition: { duration: 100 } },
   "default": { x: 0, y: 0, transition: { duration: 0 } }
 })
 
