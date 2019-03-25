@@ -127,3 +127,7 @@ export const moveRight = (board) => {
 export const getRandomInt = (max) => {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
+export const getScore = (board) => {
+  return board.reduce((running, current) => running += current*2)
+}

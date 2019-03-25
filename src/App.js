@@ -10,7 +10,8 @@ import {
   moveUp,
   moveDown,
   arraysEqual,
-  getRandomInt } from './utils/game'
+  getRandomInt,
+  getScore } from './utils/game'
 import './App.css'
 
 const blankBoard = [
@@ -31,7 +32,8 @@ class App extends Component {
   state = {
     board: store.get('board', blankBoard),
     moveBoard: blankMoveBoard,
-    moving: false
+    moving: false,
+    topScore: store.get('topScore', 0)
   }
 
   insertNewNumber = (state = this.state) => {
@@ -48,6 +50,12 @@ class App extends Component {
 
     this.setState({board, moving: false})
     store.set('board', board)
+
+    const currentScore = getScore(board)
+    if (currentScore > this.state.topScore) {
+      this.setState({topScore: currentScore})
+      store.set('topScore', currentScore)
+    }
   }
 
   componentDidMount() {
@@ -119,6 +127,8 @@ class App extends Component {
       <div className="App">
         <button onClick={this.resetBoard}>Reset</button>
         <br />
+        <p>Top: {this.state.topScore}</p> 
+        <p>Score: {getScore(this.state.board)}</p>
         <br />
         <div class="centered">
           <div class="container">
