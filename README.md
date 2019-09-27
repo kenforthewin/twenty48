@@ -1,4 +1,6 @@
-Play in your browser: https://twenty48.kenforthewin.com/
+Play in your browser: https://twenty48.kenforthewin.com/. Use arrow keys on computer or swipes on the phone.
+
+It's currently set to spawn only 4 blocks. You can easily switch it back to normal, random blocks of 2 and 4. I found the game was a bit faster with 4s, might make try 4s and 8s in the future.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
